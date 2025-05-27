@@ -24,3 +24,48 @@
   </header>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        #todo-container { max-width: 300px; margin: auto; text-align: center; }
+        ul { padding: 0; list-style: none; }
+        li { display: flex; justify-content: space-between; padding: 5px; }
+        .completed { text-decoration: line-through; }
+    </style>
+</head>
+<body>
+    <div id="todo-container">
+        <h2>To-Do List</h2>
+        <input type="text" id="taskInput" placeholder="Add a task">
+        <button onclick="addTask()">Add</button>
+        <ul id="taskList"></ul>
+    </div>
+    <script>
+        function addTask() {
+            let taskInput = document.getElementById("taskInput");
+            let taskList = document.getElementById("taskList");
+
+            if (taskInput.value.trim() === "") return;
+
+            let li = document.createElement("li");
+            li.innerHTML = `<span onclick="toggleComplete(this)">${taskInput.value}</span>
+                            <button onclick="removeTask(this)">Delete</button>`;
+            taskList.appendChild(li);
+            taskInput.value = "";
+        }
+
+        function removeTask(button) {
+            button.parentElement.remove();
+        }
+
+        function toggleComplete(span) {
+            span.classList.toggle("completed");
+        }
+    </script>
+</body>
+</html>
